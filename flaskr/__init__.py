@@ -1,4 +1,6 @@
 import os
+from os import environ
+
 
 from flask import Flask
 
@@ -9,6 +11,7 @@ def create_app(test_config=None):
     SECRET_KEY= 'dev',
     DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
   )
+  app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL') or 'sqlite:///myDB.db'
 
   if test_config is None:
 
